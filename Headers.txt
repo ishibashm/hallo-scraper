@@ -1,0 +1,94 @@
+HTTP/1.1 200 OK
+Date: Mon, 21 Apr 2025 12:08:07 GMT
+Content-Type: text/html;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+X-FRAME-OPTIONS: SAMEORIGIN
+Pragma: no-cache
+Cache-Control: no-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Content-Language: ja
+Set-Cookie: JSESSIONID=comXC54HmIxmxOMJU-GEV9GoL10LJQmEazi-yIZU0fgz6zKNJ23u0PPOExQx3FUy.OCP_APPLICATION_9-1; Path=/kensaku; HttpOnly
+POST /kensaku/GECA110010.do HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ja,ja-JP;q=0.9,ko;q=0.8
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 986
+Content-Type: application/x-www-form-urlencoded
+Cookie: JSESSIONID=comXC54HmIxmxOMJU-GEV9GoL10LJQmEazi-yIZU0fgz6zKNJ23u0PPOExQx3FUy.OCP_APPLICATION_9-1
+DNT: 1
+Host: www.hellowork.mhlw.go.jp
+Origin: https://www.hellowork.mhlw.go.jp
+Referer: https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+kSNoJo:
+kSNoGe:
+kjKbnRadioBtn: 5
+nenreiInput:
+tDFK1CmbBox: 26
+tDFK2CmbBox: 27
+tDFK3CmbBox: 25
+sKGYBRUIJo1:
+sKGYBRUIGe1:
+sKGYBRUIJo2:
+sKGYBRUIGe2:
+sKGYBRUIJo3:
+sKGYBRUIGe3:
+freeWordInput:
+nOTKNSKFreeWordInput:
+searchBtn: 検索
+kJNoJo1:
+kJNoGe1:
+kJNoJo2:
+kJNoGe2:
+kJNoJo3:
+kJNoGe3:
+kJNoJo4:
+kJNoGe4:
+kJNoJo5:
+kJNoGe5:
+jGSHNoJo:
+jGSHNoChuu:
+jGSHNoGe:
+kyujinkensu: 2517
+fwListNaviSortTop: 1
+fwListNaviDispTop: 30
+fwListNaviSortBtm: 1
+fwListNaviDispBtm: 30
+fwListNowPage: 1
+fwListLeftPage: 1
+fwListNaviCount: 7
+fwListNaviDisp: 30
+fwListNaviSort: 1
+iNFTeikyoRiyoDantaiID:
+searchClear: 0
+siku1Hidden:
+siku2Hidden:
+siku3Hidden:
+kiboSuruSKSU1Hidden:
+kiboSuruSKSU2Hidden:
+kiboSuruSKSU3Hidden:
+summaryDisp: true
+searchInitDisp: 1
+screenId: GECA110010
+action:
+codeAssistType:
+codeAssistKind:
+codeAssistCode:
+codeAssistItemCode:
+codeAssistItemName:
+codeAssistDivide:
+maba_vrbs: infTkRiyoDantaiBtn,searchShosaiBtn,searchBtn,searchNoBtn,searchClearBtn,dispDetailBtn,kyujinhyoBtn
+preCheckFlg: false

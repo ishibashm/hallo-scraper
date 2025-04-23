@@ -1,0 +1,10 @@
+送信先URL: https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do
+メソッド: POST
+データ (ペイロード):
+kjKbnRadioBtn: '5' (障害者)
+tDFK1CmbBox: '26' (京都)
+tDFK2CmbBox: '27' (大阪)
+tDFK3CmbBox: '25' (滋賀)
+action: ''
+searchBtn: '検索'
+その他、前回特定した必須のパラメータすべて
