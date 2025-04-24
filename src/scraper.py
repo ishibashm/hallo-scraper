@@ -33,12 +33,14 @@ class HelloWorkScraper:
     Scrapes job postings from HelloWork website using Selenium.
     Fetches a specific list page, extracts list data, saves it.
     """
-    def __init__(self, prefecture_code="26"):
+    # --- Added job_category_code parameter, default is '1' (General) ---
+    def __init__(self, prefecture_code="26", job_category_code="1"):
         self.list_data = []
         self.prefecture_code = prefecture_code
+        self.job_category_code = job_category_code # Store job category code
         self.driver = None # Initialize driver as None
         self.current_page = 1
-        logging.info(f"Scraper initialized for prefecture code: {self.prefecture_code}")
+        logging.info(f"Scraper initialized for prefecture code: {self.prefecture_code}, job category: {self.job_category_code}")
 
     def _setup_driver(self):
         """Sets up the Selenium WebDriver if not already setup."""
@@ -81,19 +83,33 @@ class HelloWorkScraper:
             select.select_by_value(self.prefecture_code)
             logging.info(f"Selected prefecture code: {self.prefecture_code}")
 
-            # --- Added: Select job category radio button ---
+            # --- Modified: Select job category radio button with improved click logic ---
             try:
-                # Assuming 'kjKbnRadioBtn' is the name and '5' is the value for the desired category
-                job_category_radio_xpath = "//input[@name='kjKbnRadioBtn'][@value='5']"
+                job_category_radio_xpath = f"//input[@name='kjKbnRadioBtn'][@value='{self.job_category_code}']"
                 job_category_radio = wait.until(EC.presence_of_element_located((By.XPATH, job_category_radio_xpath)))
-                # Ensure the radio button is clickable
+                # Ensure the radio button is visible and clickable, try direct click first
+                self.driver.execute_script("arguments[0].scrollIntoViewIfNeeded(true);", job_category_radio)
+                time.sleep(0.3) # Delay after scroll
                 wait.until(EC.element_to_be_clickable((By.XPATH, job_category_radio_xpath)))
-                self.driver.execute_script("arguments[0].click();", job_category_radio)
-                logging.info("Selected job category radio button (value='5').")
+                try:
+                    job_category_radio.click()
+                    logging.debug("Successfully clicked radio button directly.")
+                except ElementClickInterceptedException:
+                    logging.warning("Direct click intercepted, attempting JavaScript click for radio button.")
+                    self.driver.execute_script("arguments[0].click();", job_category_radio)
+                    logging.debug("Successfully clicked radio button via JavaScript.")
+
+                logging.info(f"Selected job category radio button (value='{self.job_category_code}').")
             except (NoSuchElementException, TimeoutException):
-                # --- Added: Proper except block ---
-                logging.warning("Could not find or select the job category radio button (kjKbnRadioBtn value='5'). Proceeding without selecting.")
-                # pass # or just log and continue
+                logging.error(f"Could not find or select the job category radio button (value='{self.job_category_code}'). Valid codes: 1(一般), 2(新卒/既卒), 3(季節), 4(出稼ぎ), 5(障害者). Halting.")
+                return False
+            except ElementClickInterceptedException:
+                 logging.error(f"Clicking job category radio button (value='{self.job_category_code}') was intercepted even with JS fallback. Halting.")
+                 return False
+            except Exception as e:
+                logging.error(f"Unexpected error during job category selection: {e}")
+                return False
+            # --- End Modification ---
 
             # --- Ensure search button click is outside the radio button try/except ---
             search_button = wait.until(EC.element_to_be_clickable((By.ID, "ID_searchBtn")))
@@ -371,51 +387,65 @@ class HelloWorkScraper:
 if __name__ == "__main__":
     # Argument 1: Prefecture Code (optional, default '26')
     # Argument 2: Target Page Number (optional, default 1)
+    # Argument 3: Job Category Code (optional, default '1') - 1:一般, 2:新卒/既卒, 3:季節, 4:出稼ぎ, 5:障害者
     pref_code = "26" # Default Kyoto
     target_page_num = 1 # Default Page 1
+    job_cat_code = "1" # Default 一般求人
+    valid_job_cat_codes = ["1", "2", "3", "4", "5"]
 
-    if len(sys.argv) > 1:
-        # Check if the first argument looks like a prefecture code (e.g., 1 to 47)
+    args = sys.argv[1:] # Get arguments excluding script name
+
+    # More robust argument parsing
+    if len(args) > 0:
+        # Check first argument (Prefecture Code or Page Number)
         try:
-            code_val = int(sys.argv[1])
-            if 1 <= code_val <= 47:
-                 pref_code = sys.argv[1]
-                 logging.info(f"Using prefecture code from argument 1: {pref_code}")
-                 # If prefecture code is given, check for page number in arg 2
-                 if len(sys.argv) > 2:
-                     try:
-                         target_page_num = int(sys.argv[2])
-                         if target_page_num < 1:
-                              target_page_num = 1
-                              logging.warning("Target page number must be 1 or greater. Using page 1.")
-                         logging.info(f"Using target page number from argument 2: {target_page_num}")
-                     except ValueError:
-                         logging.warning(f"Invalid page number argument '{sys.argv[2]}'. Using default page {target_page_num}.")
+            # Try interpreting as Prefecture Code
+            code_val = int(args[0])
+            if 1 <= code_val <= 47 or code_val == 59:
+                pref_code = args[0]
+                logging.info(f"Using prefecture code from argument 1: {pref_code}")
+                # Check second argument (Page Number or Job Category Code)
+                if len(args) > 1:
+                    try:
+                        # Try interpreting as Page Number
+                        page_val = int(args[1])
+                        target_page_num = max(1, page_val)
+                        logging.info(f"Using target page number from argument 2: {target_page_num}")
+                        # Check third argument (Job Category Code)
+                        if len(args) > 2:
+                            if args[2] in valid_job_cat_codes:
+                                job_cat_code = args[2]
+                                logging.info(f"Using job category code from argument 3: {job_cat_code}")
+                            else:
+                                logging.warning(f"Invalid job category code '{args[2]}' in argument 3. Using default '{job_cat_code}'.")
+                    except ValueError:
+                        # If second arg is not page number, try interpreting as Job Category Code
+                        if args[1] in valid_job_cat_codes:
+                            job_cat_code = args[1]
+                            logging.info(f"Using job category code from argument 2 (page defaulted to 1): {job_cat_code}")
+                        else:
+                            logging.warning(f"Invalid argument '{args[1]}' for page number or job category. Using defaults.")
             else:
-                 # Assume first arg is page number if not a valid pref code
-                 logging.warning(f"Argument 1 ('{sys.argv[1]}') doesn't look like a valid prefecture code (1-47). Assuming it's target page number.")
-                 try:
-                     target_page_num = int(sys.argv[1])
-                     if target_page_num < 1:
-                          target_page_num = 1
-                     logging.info(f"Using target page number from argument 1: {target_page_num}")
-                     logging.info(f"Using default prefecture code: {pref_code}")
-                 except ValueError:
-                      logging.warning(f"Invalid argument '{sys.argv[1]}'. Using default prefecture '{pref_code}' and page {target_page_num}.")
-
+                # If first arg is integer but not valid pref code, assume it's Page Number
+                raise ValueError("Not a valid prefecture code")
         except ValueError:
-             logging.warning(f"Invalid prefecture code argument '{sys.argv[1]}'. Using default prefecture '{pref_code}'.")
-             # Check if arg 2 is page number
-             if len(sys.argv) > 2:
-                 try:
-                     target_page_num = int(sys.argv[2])
-                     if target_page_num < 1:
-                          target_page_num = 1
-                     logging.info(f"Using target page number from argument 2: {target_page_num}")
-                 except ValueError:
-                     logging.warning(f"Invalid page number argument '{sys.argv[2]}'. Using default page {target_page_num}.")
+            # If first arg is not integer or not valid pref code, assume it's Page Number
+            try:
+                page_val = int(args[0])
+                target_page_num = max(1, page_val)
+                logging.info(f"Using target page number from argument 1 (prefecture defaulted to {pref_code}): {target_page_num}")
+                # Check second argument (Job Category Code)
+                if len(args) > 1:
+                    if args[1] in valid_job_cat_codes:
+                        job_cat_code = args[1]
+                        logging.info(f"Using job category code from argument 2: {job_cat_code}")
+                    else:
+                        logging.warning(f"Invalid job category code '{args[1]}' in argument 2. Using default '{job_cat_code}'.")
+            except ValueError:
+                logging.warning(f"Invalid first argument '{args[0]}'. Using all defaults.")
 
-    scraper = HelloWorkScraper(prefecture_code=pref_code)
+    # Instantiate scraper with parsed codes
+    scraper = HelloWorkScraper(prefecture_code=pref_code, job_category_code=job_cat_code)
     saved_file, has_next_page = scraper.run_scraper_for_page(page_num=target_page_num)
 
     # Output results for the AI/User
