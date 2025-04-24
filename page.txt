@@ -1,0 +1,584 @@
+#最初の画面
+https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do?action=initDisp&screenId=GECA110010
+#検索ボタン
+CSS selector: #ID_searchBtn
+XPath: //*[@id="ID_searchBtn"]
+#検索ボタンを押したあとのheaders
+Request URL:
+https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do
+Request Method:
+POST
+Status Code:
+200 OK
+Remote Address:
+20.44.143.206:443
+Referrer Policy:
+strict-origin-when-cross-origin
+HTTP/1.1 200 OK
+Date: Thu, 24 Apr 2025 08:05:38 GMT
+Content-Type: text/html;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+X-FRAME-OPTIONS: SAMEORIGIN
+Pragma: no-cache
+Cache-Control: no-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Content-Language: ja
+Set-Cookie: JSESSIONID=ghzAx0n0SZ2oZ9HJzs07XqSzAWGhchMLQAGcn3GEbcV5IKoJGeIS0PPcqIR74D6C.OCP_APPLICATION_6-1; Path=/kensaku; HttpOnly
+POST /kensaku/GECA110010.do HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ja,ja-JP;q=0.9,ko;q=0.8
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 812
+Content-Type: application/x-www-form-urlencoded
+Cookie: JSESSIONID=ghzAx0n0SZ2oZ9HJzs07XqSzAWGhchMLQAGcn3GEbcV5IKoJGeIS0PPcqIR74D6C.OCP_APPLICATION_6-1
+DNT: 1
+Host: www.hellowork.mhlw.go.jp
+Origin: https://www.hellowork.mhlw.go.jp
+Referer: https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do?action=initDisp&screenId=GECA110010
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+#検索ボタンを押したあとのpayload
+kSNoJo: 
+kSNoGe: 
+kjKbnRadioBtn: 5
+nenreiInput: 
+tDFK1CmbBox: 26
+tDFK2CmbBox: 
+tDFK3CmbBox: 
+sKGYBRUIJo1: 
+sKGYBRUIGe1: 
+sKGYBRUIJo2: 
+sKGYBRUIGe2: 
+sKGYBRUIJo3: 
+sKGYBRUIGe3: 
+freeWordInput: 
+nOTKNSKFreeWordInput: 
+searchBtn: %E6%A4%9C%E7%B4%A2
+kJNoJo1: 
+kJNoGe1: 
+kJNoJo2: 
+kJNoGe2: 
+kJNoJo3: 
+kJNoGe3: 
+kJNoJo4: 
+kJNoGe4: 
+kJNoJo5: 
+kJNoGe5: 
+jGSHNoJo: 
+jGSHNoChuu: 
+jGSHNoGe: 
+kyujinkensu: 0
+iNFTeikyoRiyoDantaiID: 
+searchClear: 0
+siku1Hidden: 
+siku2Hidden: 
+siku3Hidden: 
+kiboSuruSKSU1Hidden: 
+kiboSuruSKSU2Hidden: 
+kiboSuruSKSU3Hidden: 
+summaryDisp: false
+searchInitDisp: 0
+screenId: GECA110010
+action: 
+codeAssistType: 
+codeAssistKind: 
+codeAssistCode: 
+codeAssistItemCode: 
+codeAssistItemName: 
+codeAssistDivide: 
+maba_vrbs: infTkRiyoDantaiBtn%2CsearchShosaiBtn%2CsearchBtn%2CsearchNoBtn%2CsearchClearBtn%2CdispDetailBtn%2CkyujinhyoBtn
+preCheckFlg: false
+#検索ボタンを押したあとのpayload view source
+kSNoJo=&kSNoGe=&kjKbnRadioBtn=5&nenreiInput=&tDFK1CmbBox=26&tDFK2CmbBox=&tDFK3CmbBox=&sKGYBRUIJo1=&sKGYBRUIGe1=&sKGYBRUIJo2=&sKGYBRUIGe2=&sKGYBRUIJo3=&sKGYBRUIGe3=&freeWordInput=&nOTKNSKFreeWordInput=&searchBtn=%E6%A4%9C%E7%B4%A2&kJNoJo1=&kJNoGe1=&kJNoJo2=&kJNoGe2=&kJNoJo3=&kJNoGe3=&kJNoJo4=&kJNoGe4=&kJNoJo5=&kJNoGe5=&jGSHNoJo=&jGSHNoChuu=&jGSHNoGe=&kyujinkensu=0&iNFTeikyoRiyoDantaiID=&searchClear=0&siku1Hidden=&siku2Hidden=&siku3Hidden=&kiboSuruSKSU1Hidden=&kiboSuruSKSU2Hidden=&kiboSuruSKSU3Hidden=&summaryDisp=false&searchInitDisp=0&screenId=GECA110010&action=&codeAssistType=&codeAssistKind=&codeAssistCode=&codeAssistItemCode=&codeAssistItemName=&codeAssistDivide=&maba_vrbs=infTkRiyoDantaiBtn%2CsearchShosaiBtn%2CsearchBtn%2CsearchNoBtn%2CsearchClearBtn%2CdispDetailBtn%2CkyujinhyoBtn&preCheckFlg=false
+#検索ボタンを押したあとのResponse
+
+
+<tr class="kyujin_body">
+
+		<td>
+			<div class="flex flex_top_sa mb1">
+				<div class="left-side">
+					<table class="noborder">
+
+						<tbody><tr class="border_new">
+
+							<td class="fb in_width_9em">求人区分</td>
+							<td>
+								<div>パート（障）</div>
+
+							</td>
+						</tr>
+
+						<tr class="border_new">
+
+							<td class="fb in_width_9em">事業所名</td>
+							<td>
+								<div>ファッションセンターしまむら　大久保店</div>
+
+							</td>
+						</tr>
+
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em">就業場所</td>
+								<td>
+									<div>京都府宇治市</div>
+
+								</td>
+							</tr>
+
+						
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em">仕事の内容</td>
+								<td>
+									<div>衣料品等の陳列・販売・チェッカー・商品整理をお願いします。<br><br>※女性の方が多く活躍しています♪</div>
+
+								</td>
+							</tr>
+
+						
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em">雇用形態</td>
+								<td>
+									<div>パート労働者</div>
+
+								</td>
+							</tr>
+
+						
+						
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em va_top">賃金<div>（手当等を含む）</div>
+</td>
+								<td>
+									
+										<div class="flex">
+											<div class="disp_inline_block width15em">1,340円〜1,340円</div>
+
+										</div>
+									
+									
+									
+									
+									
+									
+									
+								</td>
+							</tr>
+
+						
+					</tbody></table>
+
+				</div>
+				<div class="right-side">
+					<table class="noborder">
+
+						
+							<tbody><tr class="border_new">
+
+								<td class="fb in_width_9em va_top">就業時間</td>
+								<td>
+									
+										<div>変形労働時間制</div>
+
+									
+									
+										<div class="flex">
+											（1）<div>09時45分〜09時15分</div>
+
+										</div>
+									
+									
+										<div class="flex">
+											（2）<div>09時45分〜13時45分</div>
+
+										</div>
+									
+									
+										<div class="flex">
+											（3）<div>13時00分〜19時15分</div>
+
+										</div>
+									
+								</td>
+							</tr>
+
+						
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em">休日</td>
+								<td>
+									<div>他</div>
+
+									<div class="flex">
+										週休二日制：<div>毎週</div>
+
+									</div>
+									
+								</td>
+							</tr>
+
+						
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em">年齢</td>
+								<td>
+									<div>不問</div>
+
+									
+								</td>
+							</tr>
+
+						
+						<tr class="border_new">
+
+							<td class="fb in_width_9em">求人番号</td>
+							<td>
+								<div class="width16em">26080-04338751</div>
+
+							</td>
+						</tr>
+
+						
+							<tr class="border_new">
+
+								<td class="fb in_width_9em">公開範囲</td>
+								<td>
+									<div>１．事業所名等を含む求人情報を公開する</div>
+
+								</td>
+							</tr>
+
+						
+						
+					</tbody></table>
+
+				</div>
+			</div>
+		</td>
+	</tr>
+
+#抽出データ
+項目 | 説明 | CSS セレクタ
+職種 | 「（障）店舗スタッフ…」 | tr.kyujin_head strong
+受付年月日 | 「2025年4月24日」 | tr:has(div:contains("受付年月日")) .fs13.ml01:nth-of-type(1)
+紹介期限日 | 「2025年6月30日」 | tr:has(div:contains("紹介期限日")) .fs13.ml01:nth-of-type(2)
+求人区分 | 「パート（障）」 | td:contains("求人区分") + td div
+事業所名 | 「ファッションセンターしまむら…」 | td:contains("事業所名") + td div
+就業場所 | 「京都府宇治市」 | td:contains("就業場所") + td div
+仕事内容 | 衣料品等の陳列・販売・チェッカー… | td:contains("仕事の内容") + td div
+雇用形態 | 「パート労働者」 | td:contains("雇用形態") + td div
+賃金 | 「1,340円〜1,340円」 | td:contains("賃金") + td div .width15em
+就業時間（制） | 「変形労働時間制」 | td:contains("就業時間") + td div > div:first-child
+就業時間（1） | 「09時45分〜09時15分」 | td:contains("就業時間") + td div .flex:nth-of-type(2) div
+就業時間（2） | 「09時45分〜13時45分」 | td:contains("就業時間") + td div .flex:nth-of-type(3) div
+就業時間（3） | 「13時00分〜19時15分」 | td:contains("就業時間") + td div .flex:nth-of-type(4) div
+休日 | 「週休二日制：毎週」 | td:contains("休日") + td div .flex div
+年齢 | 「不問」 | td:contains("年齢") + td div
+求人番号 | 「26080-04338751」 | td:contains("求人番号") + td div
+公開範囲 | 「１．事業所名等を含む求人情報…」 | td:contains("公開範囲") + td div
+特記事項ラベル群 | 「経験不問」「学歴不問」等 | div.kodawari span.nes_label
+求人数 | 「1名」 | div.flex.fs13:contains("求人数") .fs13.ml01
+
+
+#ID_form_1 > table:nth-child(13) > tbody > tr.kyujin_head > td > div > div.flex.m05.fs1 > table > tbody > tr > td.m13.fs1 > div
+
+#ページナビのCSS selectorとXPath
+CSS Selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul
+
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(2) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[2]/input
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(3) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[3]/input
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(4) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[4]/input
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(5) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[5]/input
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(6) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[6]/input
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(7) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[7]/input
+
+CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(8) > input[type=submit]
+XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[8]/input
+
+#CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(8) > input[type=submit]
+#XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[8]/inputのボタンを押したあとのページのheaders
+
+Request URL:
+https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do
+Request Method:
+POST
+Status Code:
+200 OK
+Remote Address:
+20.44.143.206:443
+Referrer Policy:
+strict-origin-when-cross-origin
+HTTP/1.1 200 OK
+Date: Thu, 24 Apr 2025 08:30:55 GMT
+Content-Type: text/html;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+X-FRAME-OPTIONS: SAMEORIGIN
+Pragma: no-cache
+Cache-Control: no-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Content-Language: ja
+Set-Cookie: JSESSIONID=ghzAx0n0SZ2oZ9HJzs07XqSzAWGhchMLQAGcn3GEbcV5IKoJGeIS0PPcqIR74D6C.OCP_APPLICATION_6-1; Path=/kensaku; HttpOnly
+POST /kensaku/GECA110010.do HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ja,ja-JP;q=0.9,ko;q=0.8
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 998
+Content-Type: application/x-www-form-urlencoded
+Cookie: JSESSIONID=ghzAx0n0SZ2oZ9HJzs07XqSzAWGhchMLQAGcn3GEbcV5IKoJGeIS0PPcqIR74D6C.OCP_APPLICATION_6-1
+DNT: 1
+Host: www.hellowork.mhlw.go.jp
+Origin: https://www.hellowork.mhlw.go.jp
+Referer: https://www.hellowork.mhlw.go.jp/kensaku/GECA110010.do
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+#element:<input type="submit" name="fwListNaviBtnNext" value="次へ＞">
+#CSS selector:#ID_form_1 > div:nth-child(43) > div:nth-child(3) > ul > li:nth-child(8) > input[type=submit]
+#XPath: //*[@id="ID_form_1"]/div[7]/div[3]/ul/li[8]/inputのボタンを押したあとのページのペイロード
+
+kSNoJo: 
+kSNoGe: 
+kjKbnRadioBtn: 5
+nenreiInput: 
+tDFK1CmbBox: 26
+tDFK2CmbBox: 
+tDFK3CmbBox: 
+sKGYBRUIJo1: 
+sKGYBRUIGe1: 
+sKGYBRUIJo2: 
+sKGYBRUIGe2: 
+sKGYBRUIJo3: 
+sKGYBRUIGe3: 
+freeWordInput: 
+nOTKNSKFreeWordInput: 
+kJNoJo1: 
+kJNoGe1: 
+kJNoJo2: 
+kJNoGe2: 
+kJNoJo3: 
+kJNoGe3: 
+kJNoJo4: 
+kJNoGe4: 
+kJNoJo5: 
+kJNoGe5: 
+jGSHNoJo: 
+jGSHNoChuu: 
+jGSHNoGe: 
+kyujinkensu: 425
+fwListNaviSortTop: 1
+fwListNaviDispTop: 30
+fwListNaviSortBtm: 1
+fwListNaviDispBtm: 30
+fwListNaviBtnNext: %E6%AC%A1%E3%81%B8%EF%BC%9E
+fwListNowPage: 1
+fwListLeftPage: 1
+fwListNaviCount: 7
+fwListNaviDisp: 30
+fwListNaviSort: 1
+iNFTeikyoRiyoDantaiID: 
+searchClear: 0
+siku1Hidden: 
+siku2Hidden: 
+siku3Hidden: 
+kiboSuruSKSU1Hidden: 
+kiboSuruSKSU2Hidden: 
+kiboSuruSKSU3Hidden: 
+summaryDisp: true
+searchInitDisp: 1
+screenId: GECA110010
+action: 
+codeAssistType: 
+codeAssistKind: 
+codeAssistCode: 
+codeAssistItemCode: 
+codeAssistItemName: 
+codeAssistDivide: 
+maba_vrbs: infTkRiyoDantaiBtn%2CsearchShosaiBtn%2CsearchBtn%2CsearchNoBtn%2CsearchClearBtn%2CdispDetailBtn%2CkyujinhyoBtn
+preCheckFlg: false
+
+#view source
+kSNoJo=&kSNoGe=&kjKbnRadioBtn=5&nenreiInput=&tDFK1CmbBox=26&tDFK2CmbBox=&tDFK3CmbBox=&sKGYBRUIJo1=&sKGYBRUIGe1=&sKGYBRUIJo2=&sKGYBRUIGe2=&sKGYBRUIJo3=&sKGYBRUIGe3=&freeWordInput=&nOTKNSKFreeWordInput=&kJNoJo1=&kJNoGe1=&kJNoJo2=&kJNoGe2=&kJNoJo3=&kJNoGe3=&kJNoJo4=&kJNoGe4=&kJNoJo5=&kJNoGe5=&jGSHNoJo=&jGSHNoChuu=&jGSHNoGe=&kyujinkensu=425&fwListNaviSortTop=1&fwListNaviDispTop=30&fwListNaviSortBtm=1&fwListNaviDispBtm=30&fwListNaviBtnNext=%E6%AC%A1%E3%81%B8%EF%BC%9E&fwListNowPage=1&fwListLeftPage=1&fwListNaviCount=7&fwListNaviDisp=30&fwListNaviSort=1&iNFTeikyoRiyoDantaiID=&searchClear=0&siku1Hidden=&siku2Hidden=&siku3Hidden=&kiboSuruSKSU1Hidden=&kiboSuruSKSU2Hidden=&kiboSuruSKSU3Hidden=&summaryDisp=true&searchInitDisp=1&screenId=GECA110010&action=&codeAssistType=&codeAssistKind=&codeAssistCode=&codeAssistItemCode=&codeAssistItemName=&codeAssistDivide=&maba_vrbs=infTkRiyoDantaiBtn%2CsearchShosaiBtn%2CsearchBtn%2CsearchNoBtn%2CsearchClearBtn%2CdispDetailBtn%2CkyujinhyoBtn&preCheckFlg=false
+
+
+#抽出データ
+
+
+<div class="m05" name="juriAtsh" id="ID_juriAtsh">宇治公共職業安定所</div>
+<div class="m05" name="szciYbn" id="ID_szciYbn">〒611-0033</div>
+<div class="m05" name="szci" id="ID_szci">京都府宇治市大久保町田原６８－１</div>
+<a id="ID_hp" class="mb05" href="http://shimamura.jp" target="_blank">
+							http://shimamura.jp
+						</a>
+
+<table class="normal mb1">
+
+		
+			<tbody><tr>
+
+				<th scope="row">従業員数</th>
+				
+					<td>
+							<div class="fs08 m05">企業全体</div>
+							<div class="m05" name="jgisKigyoZentai" id="ID_jgisKigyoZentai">26,710人</div>
+
+					</td>
+				
+				
+					<td>
+						<div class="fs08 m05">就業場所</div>
+						<div class="m05" name="jgisShgBs" id="ID_jgisShgBs">9人</div>
+
+					</td>
+				
+				
+					<td>
+						<div class="fs08 m05">うち女性</div>
+						<div class="m05" name="jgisUchiJosei" id="ID_jgisUchiJosei">9人</div>
+
+					</td>
+				
+				
+					<td class="jgisUchiPart_col">
+						<div class="fs08 m05">うちパート</div>
+						<div class="m05" name="jgisUchiPart" id="ID_jgisUchiPart">5人</div>
+
+					</td>
+				
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">設立年</th>
+				<td colspan="4">
+					<div class="m05" name="setsuritsuNen" id="ID_setsuritsuNen">昭和28年</div>
+
+				</td>
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">資本金</th>
+				<td colspan="4">
+					<div class="m05" name="shkn" id="ID_shkn">170億8,600万円</div>
+
+				</td>
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">労働組合</th>
+				<td colspan="4">
+					<div class="m05" name="rodoKumiai" id="ID_rodoKumiai">なし</div>
+
+				</td>
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">事業内容</th>
+				<td colspan="4">
+					<div class="m05" name="jigyoNy" id="ID_jigyoNy">最新のトレンドファッションから実用衣料・寝具・インテリア等豊
+<br>富な商品を低価格（しまむら安心価格）で取り揃えた「ファッショ
+<br>ンセンターしまむら」を全国に１３５０店舗出店しています。</div>
+
+				</td>
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">会社の特長</th>
+				<td colspan="4">
+					<div class="m05" name="kaishaNoTokucho" id="ID_kaishaNoTokucho">プライベートブランドの開発にカを入れ、そのトータルクオリティ
+<br>ーの高さをお客様に支持されています。当社独自の教育研修により
+<br>徹底した店舗運営と接客で高い評価を頂いています。</div>
+
+				</td>
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">役職／代表者名</th>
+				<td colspan="4">
+					
+						<div class="fs08 m05">役職</div>
+						<div class="m05" name="yshk" id="ID_yshk">店長</div>
+
+					
+					
+						<div class="fs08 m05">代表者名</div>
+						<div class="m05" name="dhshaMei" id="ID_dhshaMei">橋本　綾</div>
+
+					
+				</td>
+			</tr>
+
+		
+		
+			<tr>
+
+				<th scope="row">法人番号</th>
+				<td colspan="4">
+					<div class="m05" name="hoNinNo" id="ID_hoNinNo">6030001004272</div>
+
+				</td>
+			</tr>
+
+
