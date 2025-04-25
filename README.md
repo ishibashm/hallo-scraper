@@ -99,6 +99,22 @@ python src/scraper.py [都道府県コード] [開始ページ] [求人区分コ
     *   例: `output/hellowork_jobs_details_1_26_20250425_details.csv`
     *   詳細データファイルは、元となった一覧データファイルごとに生成されます。
 
+## データ結合 (オプション)
+
+`--fetch-details` オプションを使用して取得した一覧データと詳細データを結合するには、`src/merge_data.py` スクリプトを使用します。
+
+```bash
+python src/merge_data.py <一覧CSVファイルパス> <詳細CSVファイルパス> <出力CSVファイルパス>
+```
+
+**例:**
+
+```bash
+python src/merge_data.py output/hellowork_jobs_list_page_1_26_20250425.csv output/hellowork_jobs_details_1_26_20250425_details.csv output/merged_jobs_page_1.csv
+```
+
+これにより、指定した一覧CSVと詳細CSVが `job_number` をキーとして結合され、`<出力CSVファイルパス>` に保存されます。
+
 ## 設定
 
 スクレイピングに関する設定は `config/settings.py` で変更できます。

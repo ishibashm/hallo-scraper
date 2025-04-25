@@ -128,7 +128,7 @@ class HelloWorkScraper:
             logging.info("Clicked search button.")
 
             # Wait for a known element on the results page
-            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.kyujin, #ID_noItem"))) # Wait for job table or "no results" message
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "form#ID_form_1, #ID_noItem"))) # Wait for main form or "no results" message
             logging.info("Search results page loaded (Page 1).")
             self.current_page = 1
 
@@ -144,8 +144,8 @@ class HelloWorkScraper:
                     self.driver.execute_script("arguments[0].click();", next_button_element)
                     self.current_page += 1
 
-                    # Wait for the next page to load by waiting for the previous button OR job table/no results
-                    wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='submit'][@name='fwListNaviBtnPrev'] | //table[@class='kyujin'] | //div[@id='ID_noItem']")))
+                    # Wait for the next page to load by waiting for the previous button OR main form/no results
+                    wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='submit'][@name='fwListNaviBtnPrev'] | //form[@id='ID_form_1'] | //div[@id='ID_noItem']")))
                     logging.info(f"Successfully navigated to page {self.current_page}")
                     time.sleep(REQUEST_INTERVAL) # Wait after page load
 
@@ -185,29 +185,30 @@ class HelloWorkScraper:
 
         soup = BeautifulSoup(self.driver.page_source, 'lxml')
         page_list_data = []
-        job_table = soup.find('table', class_='kyujin')
 
-        if not job_table:
-            if soup.find(id='ID_noItem') or "検索結果はありませんでした" in self.driver.page_source:
-                logging.info(f"No job results found on page {self.current_page}.")
-                self.list_data = [] # Ensure list_data is empty
-                return True # Successfully parsed "no results"
-            logging.warning(f"Could not find job table (table.kyujin) on page {self.current_page}.")
-            return False
+        # --- MODIFIED: Search the entire document for job items first ---
+        job_items = soup.select("tr.kyujin_head")
+        logging.info(f"Found {len(job_items)} job items (tr.kyujin_head) in the entire document on page {self.current_page}.")
+        # --- END MODIFICATION ---
 
-        job_items = job_table.select("tbody > tr.kyujin_head")
-        logging.info(f"Found {len(job_items)} job items (tr.kyujin_head) on page {self.current_page}.")
+        # Optional: Check if the main form exists as a basic validation, but don't necessarily fail if items were found elsewhere
+        main_form = soup.select_one("form#ID_form_1")
+        if not main_form:
+             logging.warning(f"Main form (form#ID_form_1) not found, but proceeding as job items might exist outside it.")
 
         if not job_items:
-            logging.info(f"No job items (tr.kyujin_head) found within the table on page {self.current_page}.")
-            self.list_data = []
-            return True # No items is a valid parse state
+            if soup.find(id='ID_noItem') or "検索結果はありませんでした" in self.driver.page_source:
+                logging.info(f"No job results found on page {self.current_page}.")
+            else:
+                logging.warning(f"No job items (tr.kyujin_head) found anywhere on page {self.current_page}.")
+            self.list_data = [] # Ensure list_data is empty
+            return True # No items is a valid parse state, or "no results" page
 
         for i, header in enumerate(job_items):
             job_data = {}
             logging.debug(f"--- Processing Job {i+1} on page {self.current_page} ---")
 
-            # --- Find related rows ---
+            # --- Find related rows (relative to the current header) ---
             date_row = header.find_next_sibling('tr')
             body_row = date_row.find_next_sibling('tr', class_='kyujin_body') if date_row else None
             notes_row = None
@@ -224,9 +225,8 @@ class HelloWorkScraper:
                         break # Found footer, stop searching siblings
                     elif potential_next.select_one("div.kodawari"):
                         notes_row = potential_next
-                    elif potential_next.select_one("div.fs13.ml01") or '求人数' in potential_next.text:
-                         # Assuming row with fs13.ml01 or text '求人数' is the positions row
-                         # This might need refinement if the structure is inconsistent
+                    # Check specifically for the structure containing '求人数'
+                    elif potential_next.select_one("div.fs13.ml01") and '求人数' in potential_next.text:
                         positions_row = potential_next
 
                     current_row = potential_next
@@ -282,17 +282,10 @@ class HelloWorkScraper:
             if positions_row:
                 positions_element = positions_row.select_one("div.fs13.ml01")
                 if positions_element:
-                    job_data['number_of_positions'] = positions_element.text.strip()
+                    job_data['number_of_positions'] = positions_element.text.strip().replace('求人数：','').split('名')[0].strip() # Extract number
                     logging.debug(f"  Positions: {job_data['number_of_positions']}")
-                else: # Fallback by text
-                    td_elements = positions_row.find_all('td')
-                    for td in td_elements:
-                        if '求人数' in td.text:
-                            pos_text = td.text.replace('求人数：','').split('名')[0].strip()
-                            job_data['number_of_positions'] = pos_text
-                            logging.debug(f"  Positions (fallback): {job_data['number_of_positions']}")
-                            break
-                    if not job_data['number_of_positions']: logging.debug("Positions element/text not found in positions_row")
+                else: # Fallback might not be needed if the selector is reliable
+                     logging.debug("Positions element (div.fs13.ml01) not found in positions_row")
             else: logging.debug(f"No positions row found for Job {i+1}")
 
             # --- Split Job Number ---
@@ -358,7 +351,6 @@ class HelloWorkScraper:
 
     def run_scraper_for_page(self, page_num=1):
         """Navigates to a specific page, parses list data, and saves it. (Less used now)"""
-        # This method might still be useful for testing a single page
         if not self.search_and_navigate(target_page=page_num):
             logging.error(f"Failed to navigate to page {page_num}.")
             self.close_driver()
@@ -411,7 +403,7 @@ class HelloWorkScraper:
 
             parse_successful = self.parse_list_page_data()
             saved_filepath = None
-            if parse_successful and self.list_data:
+            if parse_successful and self.list_data: # Only save if parse was ok AND data exists
                 saved_filepath = self.save_list_data()
                 if saved_filepath:
                     total_saved_files.append(saved_filepath)
@@ -421,6 +413,8 @@ class HelloWorkScraper:
                     break
             elif parse_successful and not self.list_data:
                  logging.info(f"No job listings found on page {self.current_page}.")
+                 # Still increment counter if user wants to be prompted even on empty pages
+                 pages_processed_since_prompt += 1
             else: # parse_successful was False
                  logging.warning(f"Failed to parse page {self.current_page}. Stopping pagination for safety.")
                  break
@@ -435,10 +429,10 @@ class HelloWorkScraper:
                         logging.info("User chose to stop pagination.")
                         break
                     else:
-                        pages_processed_since_prompt = 0
+                        pages_processed_since_prompt = 0 # Reset counter
                 except EOFError:
                     logging.warning("Could not get user input (EOFError). Continuing pagination automatically.")
-                    pages_processed_since_prompt = 0
+                    pages_processed_since_prompt = 0 # Reset to avoid repeated warnings
 
             # Check if next page exists
             if not self.check_next_page_exists():
@@ -456,7 +450,8 @@ class HelloWorkScraper:
                 self.driver.execute_script("arguments[0].click();", next_button_element)
                 self.current_page += 1
 
-                wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='submit'][@name='fwListNaviBtnPrev'] | //table[@class='kyujin'] | //div[@id='ID_noItem']")))
+                # Wait for next page load indicator
+                wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='submit'][@name='fwListNaviBtnPrev'] | //form[@id='ID_form_1'] | //div[@id='ID_noItem']")))
                 logging.info(f"Successfully navigated to page {self.current_page}")
                 time.sleep(REQUEST_INTERVAL)
 
