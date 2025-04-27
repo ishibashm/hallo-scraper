@@ -99,6 +99,46 @@ python src/scraper.py [都道府県コード] [開始ページ] [求人区分コ
     *   例: `output/hellowork_jobs_details_1_26_20250425_details.csv`
     *   詳細データファイルは、元となった一覧データファイルごとに生成されます。
 
+## 詳細データの取得 (個別実行)
+
+`src/scraper.py` で取得した求人一覧CSV (`hellowork_jobs_list_page_...csv`) を元に、各求人の詳細情報を取得するには `src/detail_scraper.py` スクリプトを使用します。
+
+```bash
+python src/detail_scraper.py <一覧CSVファイルパス> [--limit N]
+```
+
+**引数:**
+
+*   **`<一覧CSVファイルパス>`:** (必須) `job_number` (または `kSNoJo`, `kSNoGe`) と `detail_link_href` 列を含む、`src/scraper.py` で生成された一覧CSVファイルのパスを指定します。
+*   **`--limit N`:** (任意) 新たに取得する求人詳細の最大件数を指定します。指定しない場合は、一覧CSVに含まれる未取得の求人すべてが対象となります。
+
+**動作:**
+
+1.  指定された `<一覧CSVファイルパス>` を読み込みます。
+2.  対応する詳細データCSVファイル（ファイル名は一覧CSVに基づき自動生成、例: `output/hellowork_jobs_details_..._details.csv`）が `output` ディレクトリに存在するか確認します。
+3.  存在する場合、そのCSVファイルから既に取得済みの求人番号 (`job_number_ref`) を読み込み、スキップ対象とします。
+4.  一覧CSV内の求人のうち、まだ詳細データを取得していない求人の詳細ページをスクレイピングします (`--limit` が指定されていればその件数まで)。
+5.  新しく取得した詳細データを、詳細データCSVファイルに **追記** します。
+6.  **同時に**、その時点での詳細データCSVファイルに含まれる **すべてのデータ** を、対応するJSONファイル（例: `output/hellowork_jobs_details_..._details.json`）に **上書き** で保存します。これは主にデバッグ用途です。
+
+**出力ファイル:**
+
+*   **詳細データ (CSV):** `output/hellowork_jobs_details_..._details.csv`
+    *   ファイルが存在しない場合は新規作成されます。
+    *   ファイルが存在する場合は、新しく取得したデータが末尾に **追記** されます。
+*   **詳細データ (JSON):** `output/hellowork_jobs_details_..._details.json`
+    *   常に **上書き** され、その時点でのCSVファイル全体のデータが反映されます。
+
+**実行例:**
+
+*   **一覧CSV `list_page_1.csv` の未取得データをすべて取得し、`details_1_details.csv` に追記、`details_1_details.json` を上書き:**
+    ```bash
+    python src/detail_scraper.py output/hellowork_jobs_list_page_1_26_20250427.csv
+    ```
+*   **一覧CSV `list_page_1.csv` の未取得データを最大10件まで取得し、`details_1_details.csv` に追記、`details_1_details.json` を上書き:**
+    ```bash
+    python src/detail_scraper.py output/hellowork_jobs_list_page_1_26_20250427.csv --limit 10
+    ```
 ## データ結合 (オプション)
 
 `--fetch-details` オプションを使用して取得した一覧データと詳細データを結合するには、`src/merge_data.py` スクリプトを使用します。
