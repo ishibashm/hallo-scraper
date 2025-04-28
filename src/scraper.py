@@ -323,13 +323,43 @@ class HelloWorkScraper:
             df = pd.DataFrame(self.list_data)
             timestamp = datetime.now().strftime("%Y%m%d")
             pref_identifier = self.prefecture_code
-            filename = f"{OUTPUT['filename_prefix']}list_page_{self.current_page}_{pref_identifier}_{timestamp}.{OUTPUT['format']}"
             output_dir = OUTPUT['directory']
-            output_path = os.path.join(output_dir, filename)
             os.makedirs(output_dir, exist_ok=True)
-            df.to_csv(output_path, encoding=OUTPUT['encoding'], index=False)
-            logging.info(f"List data for page {self.current_page} successfully saved to: {output_path}")
-            return output_path
+
+            base_filename = f"{OUTPUT['filename_prefix']}list_page_{self.current_page}_{pref_identifier}_{timestamp}"
+            saved_paths = []
+
+            # --- CSV出力 ---
+            csv_filename = f"{base_filename}.csv"
+            csv_output_path = os.path.join(output_dir, csv_filename)
+            csv_encoding = OUTPUT.get('encoding', 'utf-8-sig') # CSV用のエンコーディング取得
+            try:
+                df.to_csv(csv_output_path, encoding=csv_encoding, index=False)
+                logging.info(f"List data for page {self.current_page} successfully saved as CSV to: {csv_output_path}")
+                saved_paths.append(csv_output_path)
+            except Exception as e:
+                logging.error(f"Failed to save list data as CSV for page {self.current_page}: {e}")
+
+            # --- JSON出力 ---
+            json_filename = f"{base_filename}.json" # 拡張子を .json に変更
+            json_output_path = os.path.join(output_dir, json_filename)
+            # JSONは通常 utf-8。設定にあればそれを使うが、なければutf-8。
+            json_encoding = OUTPUT.get('encoding_json', 'utf-8')
+            try:
+                # orient='records' でレコードの配列を生成, lines=True を削除
+                # indent=4 を追加して可読性を向上
+                json_string = df.to_json(orient='records', force_ascii=False, indent=4)
+                with open(json_output_path, 'w', encoding=json_encoding) as f:
+                    f.write(json_string)
+                logging.info(f"List data for page {self.current_page} successfully saved as JSON to: {json_output_path}")
+                saved_paths.append(json_output_path)
+            except Exception as e:
+                logging.error(f"Failed to save list data as JSON for page {self.current_page}: {e}")
+
+
+            # どちらか一方でも成功していれば、最初の成功パスを返す（互換性のため）
+            # 両方失敗した場合は None を返す
+            return saved_paths[0] if saved_paths else None
         except Exception as e:
             logging.error(f"Failed to save list data for page {self.current_page}: {e}")
             return None
